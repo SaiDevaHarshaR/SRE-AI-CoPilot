@@ -19,3 +19,7 @@ def get_k8s_fix(log: str):
 #calculator
 #search engine
 #kubectl helper
+
+#now, our AI uses tools
+#combines knowledge
+#reasons better
