@@ -23,3 +23,26 @@ def analyze(log: str):
     result = query_llm(prompt)
 
     return {"analysis": result}
+
+from fastapi import FastAPI
+from app.logs import store_log, logs_db
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "SRE AI Copilot running"}
+
+@app.post("/ingest")
+def ingest(log: str):
+    store_log(log)
+    return {"message": "Log received"}
+
+@app.get("/logs")
+def get_logs():
+    return logs_db    
+
+
+    #to run server: uvicorn app.main:app --reload
+    #to test it: http://127.0.0.1:8000/docs
+    #in another terminal: python -c "from app.worker import process_logs; process_logs()"
